@@ -1,14 +1,27 @@
 import { useState } from "react";
 import Square from "../square/Square";
+import StartButton from "../startButton/StartButton";
+import calculateWinner from "../../helpers/calculateWinner";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [player, setPlayer] = useState("");
 
   const handleClick = (i: number) => {
-    console.log("clicked");
+    console.log("clicked the square", i);
+    if (squares[i] || !player) {
+      return;
+    }
+
+    if (calculateWinner(squares)) {
+      alert("Game Over");
+      return;
+    }
+
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    nextSquares[i] = player;
     setSquares(nextSquares);
+    setPlayer(player === "X" ? "O" : "X");
   };
 
   //renders rows of squares by 3
@@ -30,7 +43,17 @@ const Board = () => {
     return rows;
   };
 
-  return <>{renderRows()}</>;
+  return (
+    <>
+      <StartButton
+        onClick={() => {
+          console.log("clicked the start button");
+          setPlayer("X");
+        }}
+      />
+      {renderRows()}
+    </>
+  );
 };
 
 export default Board;
