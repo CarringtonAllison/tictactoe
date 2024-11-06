@@ -7,7 +7,6 @@ import Status from "../status/Status";
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [player, setPlayer] = useState("");
-
   const handleClick = (i: number) => {
     if (squares[i] || !player) {
       return;
@@ -29,7 +28,7 @@ const Board = () => {
     const rows = [];
     for (let i = 0; i < squares.length; i += 3) {
       rows.push(
-        <div className="flex flex-wrap" key={i}>
+        <div className="flex flex-wrap justify-center" key={i}>
           {squares.slice(i, i + 3).map((value, index) => (
             <Square
               key={i + index}
@@ -45,10 +44,12 @@ const Board = () => {
 
   return (
     <>
-      <h1>Tic Tac Toe</h1>
-      <ChoosePlayer onClick={setPlayer} />
-      <Status squares={squares} player={player} />
-      {renderRows()}
+      <div className="max-w-7xl text-center p-8 m-0">
+        <h1>Tic Tac Toe</h1>
+        <ChoosePlayer onClick={setPlayer} />
+        <Status squares={squares} player={player} />
+        <div className="max-w-7xl p-8">{renderRows()}</div>
+      </div>
     </>
   );
 };

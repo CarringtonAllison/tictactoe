@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import Board from "./components/board/Board";
 
 const App = () => {
