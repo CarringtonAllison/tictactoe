@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Square from "../square/Square";
-import StartButton from "../startButton/StartButton";
+import ChoosePlayer from "../choosePlayer/ChoosePlayer";
 import calculateWinner from "../../helpers/calculateWinner";
+import Status from "../status/Status";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [player, setPlayer] = useState("");
 
   const handleClick = (i: number) => {
-    console.log("clicked the square", i);
     if (squares[i] || !player) {
       return;
     }
@@ -29,7 +29,7 @@ const Board = () => {
     const rows = [];
     for (let i = 0; i < squares.length; i += 3) {
       rows.push(
-        <div className="board_row" key={i}>
+        <div className="flex flex-wrap" key={i}>
           {squares.slice(i, i + 3).map((value, index) => (
             <Square
               key={i + index}
@@ -45,12 +45,9 @@ const Board = () => {
 
   return (
     <>
-      <StartButton
-        onClick={() => {
-          console.log("clicked the start button");
-          setPlayer("X");
-        }}
-      />
+      <h1>Tic Tac Toe</h1>
+      <ChoosePlayer onClick={setPlayer} />
+      <Status squares={squares} player={player} />
       {renderRows()}
     </>
   );
