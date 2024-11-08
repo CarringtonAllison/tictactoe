@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Square from "../square/Square";
 import ChoosePlayer from "../choosePlayer/ChoosePlayer";
-import calculateWinner from "../../helpers/calculateWinner";
+import calculateWinner from "../../utils/calculateWinner";
 import Status from "../status/Status";
 
 const Board = () => {
@@ -28,6 +28,12 @@ const Board = () => {
   const handlePlayerClick = (player: string) => {
     setPlayer(player);
     setPlayerChosen(true);
+  };
+
+  const handleRestartGame = () => {
+    setSquares(Array(9).fill(null));
+    setPlayer("");
+    setPlayerChosen(false);
   };
 
   //renders rows of squares by 3
@@ -57,7 +63,11 @@ const Board = () => {
           {!playerChosen ? (
             <ChoosePlayer onClick={handlePlayerClick} />
           ) : (
-            <Status squares={squares} player={player} />
+            <Status
+              squares={squares}
+              player={player}
+              restartGame={handleRestartGame}
+            />
           )}
         </div>
         <div className="max-w-7xl">{renderRows()}</div>
