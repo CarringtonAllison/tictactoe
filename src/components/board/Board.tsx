@@ -15,7 +15,7 @@ const Board = () => {
     }
 
     if (calculateWinner(squares)) {
-      alert("Game Over");
+      alert("Click Restart Game to play again.");
       return;
     }
 
