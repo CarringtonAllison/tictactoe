@@ -2,6 +2,8 @@
 
 This project is a simple Tic Tac Toe game I built to try some new frameworks with React, TypeScript, and Vite. It uses Tailwind CSS for styling and ESLint for linting.
 
+![alt text](public/TicTacToe.png)
+
 ## Getting Started
 
 ### Prerequisites
