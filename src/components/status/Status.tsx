@@ -11,10 +11,10 @@ const Status: React.FC<StatusProps> = ({ squares, player }) => {
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = `Current player: ${player}`;
+    status = `"${player}" it is now your turn.`;
   }
 
-  return <div>{status}</div>;
+  return <>{status}</>;
 };
 
 export default Status;

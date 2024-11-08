@@ -7,6 +7,8 @@ import Status from "../status/Status";
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [player, setPlayer] = useState("");
+  const [playerChosen, setPlayerChosen] = useState(false);
+
   const handleClick = (i: number) => {
     if (squares[i] || !player) {
       return;
@@ -21,6 +23,11 @@ const Board = () => {
     nextSquares[i] = player;
     setSquares(nextSquares);
     setPlayer(player === "X" ? "O" : "X");
+  };
+
+  const handlePlayerClick = (player: string) => {
+    setPlayer(player);
+    setPlayerChosen(true);
   };
 
   //renders rows of squares by 3
@@ -45,10 +52,15 @@ const Board = () => {
   return (
     <>
       <div className="max-w-7xl text-center p-8 m-0">
-        <h1>Tic Tac Toe</h1>
-        <ChoosePlayer onClick={setPlayer} />
-        <Status squares={squares} player={player} />
-        <div className="max-w-7xl p-8">{renderRows()}</div>
+        <h1 className="text-5xl">Tic Tac Toe</h1>
+        <div className="flex justify-center items-center m-4 h-16">
+          {!playerChosen ? (
+            <ChoosePlayer onClick={handlePlayerClick} />
+          ) : (
+            <Status squares={squares} player={player} />
+          )}
+        </div>
+        <div className="max-w-7xl">{renderRows()}</div>
       </div>
     </>
   );
